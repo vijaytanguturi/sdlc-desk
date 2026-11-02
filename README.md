@@ -106,7 +106,7 @@ Open the URL Vite prints (default `http://127.0.0.1:5173`).
 ## Testing
 
 - **Unit and component tests** cover markdown/CSV exports, storage parsing and failure handling, the store, search, checklist math, the rule-based generator, and the requirement, checklist and library screens.
-- **Playwright** covers every tool end to end on Chromium, Firefox, WebKit and a Pixel 7 viewport: create → preview → save → reload → reopen → export, plus clipboard copy (Chromium), backup/restore, theme persistence, routing and horizontal-overflow checks.
+- **Playwright** covers every tool end to end against the production build on Chromium, Firefox, WebKit and a Pixel 7 viewport: create → preview → save → reload → reopen → export, plus clipboard copy (Chromium), backup/restore, theme persistence, routing and horizontal-overflow checks.
 
 Test results are reported truthfully: run the commands above to reproduce them. CI runs lint, unit tests, build and the Playwright suite on every push and pull request.
 

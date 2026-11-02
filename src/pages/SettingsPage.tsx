@@ -5,7 +5,7 @@ import { Card, CardBody, CardHead } from '../components/Card';
 import { Button } from '../components/Button';
 import { ThemeToggle } from '../components/ThemeToggle';
 import { Modal } from '../components/Modal';
-import { useToast } from '../components/Toast';
+import { useToast } from '../components/toastContext';
 import { useWorkspace } from '../lib/store';
 import { serializeWorkspace } from '../lib/storage';
 import { downloadText } from '../lib/io';

@@ -1,6 +1,6 @@
 import { Copy, Download } from 'lucide-react';
 import { Button } from './Button';
-import { useToast } from './Toast';
+import { useToast } from './toastContext';
 import { copyText, downloadText } from '../lib/io';
 
 export function DocumentPreview({

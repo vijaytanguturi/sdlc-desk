@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   ArrowRight,
@@ -36,7 +37,7 @@ export function Dashboard() {
   const releases = items.filter((item) => item.tool === 'release');
   const testCaseCount = countTestCases(items);
 
-  const weekAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
+  const [weekAgo] = useState(() => Date.now() - 7 * 24 * 60 * 60 * 1000);
   const standupsThisWeek = items.filter((item) => {
     if (item.tool !== 'standup') return false;
     const date = new Date((item.data as StandupData).date);
