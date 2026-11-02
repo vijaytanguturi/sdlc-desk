@@ -93,10 +93,12 @@ test('test cases: generate, edit, delete, save, reopen and export CSV', async ({
   expect(headingAfter).not.toBe(headingBefore);
 });
 
-test('defect: capture, copy to clipboard and export', async ({ page, context }) => {
-  await context.grantPermissions(['clipboard-read', 'clipboard-write'], {
-    origin: 'http://127.0.0.1:4173',
-  });
+test('defect: capture, copy to clipboard and export', async ({ page, context, browserName }) => {
+  if (browserName === 'chromium') {
+    await context.grantPermissions(['clipboard-read', 'clipboard-write'], {
+      origin: 'http://127.0.0.1:4173',
+    });
+  }
   await page.goto('/#/bugs');
   await page.getByLabel('Defect title').fill('Bulk approval times out');
   await page.getByLabel('Environment').fill('Release 2.4.0 · Chrome 141 · staging');
@@ -114,10 +116,12 @@ test('defect: capture, copy to clipboard and export', async ({ page, context }) 
   await expect(preview).toContainText('| Severity | Major |');
   await expect(preview).toContainText('1. Select 50 pending claims and choose Approve.');
 
-  await page.getByRole('button', { name: 'Copy' }).click();
-  await expect(page.getByText('Copied to clipboard.')).toBeVisible();
-  const clipboard = await page.evaluate(() => navigator.clipboard.readText());
-  expect(clipboard).toContain('# Defect: Bulk approval times out');
+  if (browserName === 'chromium') {
+    await page.getByRole('button', { name: 'Copy' }).click();
+    await expect(page.getByText('Copied to clipboard.')).toBeVisible();
+    const clipboard = await page.evaluate(() => navigator.clipboard.readText());
+    expect(clipboard).toContain('# Defect: Bulk approval times out');
+  }
 
   const downloadPromise = page.waitForEvent('download');
   await page.getByRole('button', { name: 'Export Markdown' }).click();
